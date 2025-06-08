@@ -130,24 +130,36 @@ app.use((err, req, res, next) => {
 
 // Start the server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
 
 // MongoDB connection
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 10000,
-    socketTimeoutMS: 45000,
-})
-.then(() => {
-    console.log('MongoDB connecté avec succès');
-})
-.catch(err => {
-    console.error('Erreur de connexion MongoDB:', err);
-    process.exit(1);
+
+// Fonction de connexion avec retry
+const connectDB = async (retries = 5) => {
+    try {
+        await mongoose.connect('mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 30000,
+        });
+        console.log('MongoDB connecté avec succès');
+    } catch (err) {
+        if (retries > 0) {
+            console.log(`Tentative de reconnexion... (${retries} restantes)`);
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            return connectDB(retries - 1);
+        }
+        console.error('Erreur finale de connexion MongoDB:', err);
+        process.exit(1);
+    }
+};
+
+// Démarrer le serveur uniquement après la connexion à MongoDB
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
 });
 
 // Ajouter un gestionnaire d'erreurs non capturées
