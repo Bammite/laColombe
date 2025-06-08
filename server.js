@@ -122,10 +122,15 @@ app.listen(PORT, () => {
 });
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01')
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01';
+
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
 .then(() => {
     console.log('MongoDB connected successfully');
 })
 .catch((err) => {
     console.error('MongoDB connection error:', err);
-}); 
+});
