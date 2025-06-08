@@ -134,6 +134,12 @@ const PORT = process.env.PORT || 3000;
 // MongoDB connection
 mongoose.set('strictQuery', false);
 
+// Middleware de journalisation
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
+
 // Fonction de connexion avec retry
 const connectDB = async (retries = 5) => {
     try {
@@ -143,24 +149,38 @@ const connectDB = async (retries = 5) => {
             serverSelectionTimeoutMS: 5000,
             socketTimeoutMS: 30000,
         });
-        console.log('MongoDB connecté avec succès');
+        console.log('[MongoDB] Connexion établie');
+        return true;
     } catch (err) {
         if (retries > 0) {
-            console.log(`Tentative de reconnexion... (${retries} restantes)`);
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            console.log(`[MongoDB] Tentative de reconnexion... (${retries})`);
+            await new Promise(resolve => setTimeout(resolve, 3000));
             return connectDB(retries - 1);
         }
-        console.error('Erreur finale de connexion MongoDB:', err);
-        process.exit(1);
+        console.error('[MongoDB] Erreur finale:', err);
+        return false;
     }
 };
 
-// Démarrer le serveur uniquement après la connexion à MongoDB
-connectDB().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-});
+// Modifiez le démarrage du serveur
+const startServer = async () => {
+    const connected = await connectDB();
+    if (!connected) {
+        console.error('Impossible de démarrer sans MongoDB');
+        process.exit(1);
+    }
+    
+    if (process.env.NODE_ENV !== 'production') {
+        app.listen(PORT, () => {
+            console.log(`[Server] Démarré sur le port ${PORT}`);
+        });
+    } else {
+        // En production (Vercel), pas besoin d'écouter explicitement
+        console.log('[Server] Mode production');
+    }
+};
+
+startServer();
 
 // Ajouter un gestionnaire d'erreurs non capturées
 process.on('unhandledRejection', (reason, promise) => {
