@@ -4,20 +4,24 @@
     {
       "src": "server.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "Fichierpublic/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "server.js"
+      "src": "/assets/(.*)",
+      "dest": "/Fichierpublic/assets/$1"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "/Fichierpublic/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/Fichierpublic/js/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/Fichierpublic/$1"
+      "dest": "server.js"
     }
   ]
 }

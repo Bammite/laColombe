@@ -64,6 +64,9 @@ app.use(rapport); // Utiliser les route de rapport
 
 // Servir les fichiers statiques depuis le répertoire ./Fichierpublic
 app.use(express.static(path.join(__dirname, 'Fichierpublic')));
+app.use('/assets', express.static(path.join(__dirname, 'Fichierpublic/assets')));
+app.use('/css', express.static(path.join(__dirname, 'Fichierpublic/css')));
+app.use('/js', express.static(path.join(__dirname, 'Fichierpublic/js')));
 
 // Basic route
 app.get('/', (req, res) => {
