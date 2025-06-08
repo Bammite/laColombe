@@ -34,11 +34,7 @@ const {
 app.use(session({
     secret: 'votre_secret_de_session',
     resave: false,
-    saveUninitialized: true,
-    cookie: {
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 24 * 60 * 60 * 1000 // 24 heures
-    }
+    saveUninitialized: true
 }));
 
 // Middleware pour parser les données JSON
@@ -120,33 +116,16 @@ app.use('/assets/uploads', (req, res, next) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// Ajoutez cette ligne avant la connexion MongoDB
-mongoose.set('strictQuery', false);
-
 // MongoDB connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01';
-
-mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect('mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01')
 .then(() => {
     console.log('MongoDB connected successfully');
 })
 .catch((err) => {
     console.error('MongoDB connection error:', err);
-});
-
-// Gestion des erreurs
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({
-        success: false,
-        message: 'Une erreur est survenue sur le serveur'
-    });
 });
