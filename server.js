@@ -116,16 +116,18 @@ app.use('/assets/uploads', (req, res, next) => {
 });
 
 // Start the server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01')
-.then(() => {
-    console.log('MongoDB connected successfully');
+mongoose.set('strictQuery', false);
+mongoose.connect('mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
 })
-.catch((err) => {
-    console.error('MongoDB connection error:', err);
-});
+.then(() => console.log('Connexion à MongoDB réussie!'))
+.catch(err => console.error('Erreur de connexion à MongoDB:', err));
