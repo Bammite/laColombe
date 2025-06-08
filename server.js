@@ -34,7 +34,11 @@ const {
 app.use(session({
     secret: 'votre_secret_de_session',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 24 * 60 * 60 * 1000 // 24 heures
+    }
 }));
 
 // Middleware pour parser les données JSON
@@ -136,4 +140,13 @@ mongoose.connect(MONGODB_URI, {
 })
 .catch((err) => {
     console.error('MongoDB connection error:', err);
+});
+
+// Gestion des erreurs
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({
+        success: false,
+        message: 'Une erreur est survenue sur le serveur'
+    });
 });
