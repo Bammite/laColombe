@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Nouveau Projet</title>
+    <link rel="shortcut icon" type="x-icon" href="./asset/svg/icon.svg">
+    <link rel="stylesheet" href="./css/project.css">
+    <link rel="stylesheet" href="./css/fenetre.css">
+</head>
+<body>
+    
+    <div id="modal-publication" class="modal">
+        <div class="modal-content">
+            <span class="close-actualite close-button">&times;</span>
+
+            <!-- Formulaire pour ajouter une tâche -->
+            <span class="formeModal1 formeTache">
+                <p>Ajouter une Tâche</p>
+                <form id="tacheForm">
+                    <label for="titreTache">Titre :</label>
+                    <input type="text" id="titreTache" name="titre" required>
+
+                    <label for="assignéA">Assigné à :</label>
+                    <input type="text" id="assignéA" name="assignéA" required>
+
+                    <label for="dateEcheance">Date D'écheance:</label>
+                    <input type="date" id="dateEcheance" name="date">
+                   
+                    <label for="descriptionTache">Description :</label>
+                    <textarea id="descriptionTache" name="description"></textarea>
+                    <button type="submit">Ajouter la Tâche</button>
+                    <button type="reset">Effacer</button>
+                </form>
+            </span>
+
+            <!-- Formulaire pour ajouter une dépense -->
+            <span class="formeModal1 formeAddDepense">
+                <p>Ajout d'une Dépense</p>
+                <form id="depenseForm">
+                    <label for="categorieDepense">Catégorie :</label>
+                    <select id="categorieDepense" name="categorie" required>
+                        <option value="" disabled selected>Choisissez une catégorie</option>
+                        <option value="Nourriture">Nourriture</option>
+                        <option value="Matériaux de construction">Matériaux de construction</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Logistique">Logistique</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                    <br><br>
+
+                    <label for="descriptionDepense">Description :</label>
+                    <textarea id="descriptionDepense" name="description" required></textarea>
+                    <br><br>
+
+                    <label for="montantDepense">Montant :</label>
+                    <input type="number" id="montantDepense" name="montant" required>
+                    <br><br>
+
+                    <label for="dateDepense">Date :</label>
+                    <input type="date" id="dateDepense" name="date" required>
+                    <br><br>
+
+                    <label for="fournisseurDepense">Fournisseur :</label>
+                    <input type="text" id="fournisseurDepense" name="fournisseur">
+                    <br><br>
+
+                    <label for="modePaiementDepense">Mode de Paiement :</label>
+                    <input type="text" id="modePaiementDepense" name="modePaiement">
+                    <br><br>
+
+                    <button type="submit">Ajouter la Dépense</button>
+                </form>
+            </span>
+
+            <!-- Formulaire pour ajouter un membre -->
+            <span class="formeModal1 formeAddMembre">
+                <p>Ajouter un Membre</p>
+                <form id="membreForm">
+                    <select name="Membres" id="listeMbr" required>
+                        <option value="0">Aucun Membre Disponible</option>
+                    </select>
+                    <br><br>
+
+                    <button type="submit">Ajouter le Membre</button>
+                </form>
+            </span>
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="title">CONSTRUCTION DE CABINE</h1>
+        <!-- Section Gestion du projet -->
+        <div class="section gestion-projet">
+            <h2>Gestion du projet</h2>
+            <div class="actions">
+                <div class="action" id="ajouterDepense" onclick="openModal(modalActu,'formeAddDepense');">
+                    <img src="./asset/image/devis.JPG" alt="Ajouter une dépense">
+                    <p>Ajout d'une dépense</p>
+                </div>
+                <div class="action" id="ajouterTache" onclick="openModal(modalActu,'formeTache');">
+                    <img src="./asset/image/devis.JPG" alt="Ajouter une tâche">
+                    <p>Ajout d'une tâche</p>
+                </div>
+                <div class="action" id="ajouterMembre" onclick="openModal(modalActu,'formeAddMembre');">
+                    <img src="./asset/image/devis.JPG" alt="Ajouter un membre">
+                    <p>Ajout d'un membre à l'équipe</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Contenu du projet -->
+        <div class="section contenu-projet">
+            <h2>Contenu du projet</h2>
+            <div class="description">
+                <h3>Description du projet :</h3>
+                <p>
+                    Dans le cadre d'une collaboration avec SUNUTEL, ce projet consiste à construire une cabine moderne et fonctionnelle.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, voluptas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium cum aliquam dolore ratione autem, pariatur voluptatum nostrum cumque explicabo numquam ullam omnis ad dolorem laboriosam aliquid in velit optio excepturi? 
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quos sequi ratione velit magni expedita veritatis! Eos libero neque dolore, itaque porro, iste at incidunt, totam eum quo unde esse.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, magni harum provident enim voluptates nesciunt ratione voluptas ex quis, ea mollitia temporibus fugiat reprehenderit adipisci quam deserunt, dicta dolor. Fugiat.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, culpa unde cum ea quae omnis doloribus, id sit fuga repellat sed eius placeat possimus, quod corrupti. Recusandae similique eaque quis?
+                </p>
+            </div>
+            <div class="caracteristiques">
+                <h3>Caractéristiques du projet</h3>
+                <ul>
+                    <li><strong>Type de projet :</strong> Contrat (autre : Marketing, IT, Innovation, Développement Intern)</li>
+                    <li><strong>Pertinence :</strong> Majeur (facultative, mineur, intermédiaire)</li>
+                    <li><strong>Budget alloué :</strong> 650 000 FCFA</li>
+                    <li><strong>Taille de l'équipe :</strong> 7 Individus</li>
+                    <li><strong>Date d'achèvement :</strong> 12/09/2025</li>
+                    <li><strong>Partenaire :</strong> SUNUTEL</li>
+                </ul>
+            </div>
+            <div class="Progression">
+                <h3>Progression du projet</h3>
+                <div class="barDeProgression">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%;">
+
+                        </div>
+                    </div>
+                    <div class="progress-text">75%</div>
+                </div>
+            </div>
+            <div class="taches" id="taches">
+                
+
+                
+            </div>
+
+            <div class="participants">
+                <h3>
+                    Participant du projet
+                </h3>
+
+                <div class="ListeParticipant">
+                    <!--  generer avec du js -->
+                    <!-- <div class="participant">
+                        <div class="info">
+                            <img src="./asset/image/avatar2.jpeg" alt="">
+                            <div class="n-r">
+
+                                <div class="nom">Bammite Prince</div>
+                                <div class="role">Responsable de la construction</div>
+                            </div>
+                        </div>
+                        <div class="miniMenu">...</div>
+                    </div> -->
+                    
+                </div>
+            </div>
+        </div>
+        <!-- <div class="section Finance">
+            <h2>Bilan - Aport</h2>
+            <div class="content">
+               <div class="bilanTextuel"></div>
+               <button>Fin projet</button>
+
+            </div>
+        </div> -->
+    </div>
+</body>
+<script src="./js/project.js"></script>
+<script src="./js/form1.js"></script>
+</html>
+

@@ -1,0 +1,472 @@
+
+:root {
+    --primary-color: rgba(206, 89, 26, 1);
+    --primary-color--sombre: rgb(111, 45, 9);
+    --secondary-color: rgb(111, 45, 9);
+    --text-color: black;
+    --background-color: rgb(255, 238, 218);
+    --paddingOpt: 12px;
+}
+
+/* Général */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Empêche le défilement vertical */
+    scroll-behavior: smooth; /* Ajoute un effet de défilement fluide */
+}
+
+main {
+    display: flex;
+    flex-direction: row; /* Les sections sont alignées horizontalement */
+    height: 100vh;
+    width: 300vw; /* 3 sections, donc 300% de la largeur de l'écran */
+    transition: transform 0.5s ease-in-out; /* Animation pour le défilement */
+}
+
+/* Sections spécifiques */
+
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100dvh;
+    width: 100dvw;
+    overflow-x: hidden;
+}
+
+*{
+    transition: all .3s ease-in-out;
+}
+
+.background{
+    position: fixed;
+    width: 100dvw;
+    height: 100dvh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.background img{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+
+.background .filtre{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 2s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+    position: fixed;
+    width: 95dvw;
+    z-index: 10;
+    overflow: hidden;
+    height: 70px;
+    /* background-color: antiquewhite; */
+}
+
+
+
+.logo img{
+    width: 100%;
+    max-width: 300px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.auth-option{
+    display: none;
+}
+
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.157);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    border-radius: 18px;
+    padding: 20px 25px;
+}
+
+/* Menu actif */
+.menu .indexé {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2em;
+    border-bottom: var(--primary-color) solid 2px;
+}
+
+.menu li {
+    color: white;
+}
+
+.menu li a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.menu li a.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.minibarre{
+    background-color: white;
+    height: 25px;
+    width: 3px;
+}
+
+
+
+.auth-button {
+    background-color: white;
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-button:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+ 
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+}
+
+.section {
+    position: fixed;
+    margin-top: 120px;
+    height: 100vh;
+    width: 100vw;
+    color: white;
+}
+
+.catalogue{
+    transform: translateX(100vw);
+}
+
+.contact{
+    transform: translateX(200vw);
+}
+
+
+
+.accueil .content{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    height: 80%;
+    width: 100%;
+}
+
+.accueil .content .Slogan{
+    font-size: 2.9em;
+    font-weight: bold;
+    max-width: 40%;
+    margin-left: 20px;
+}
+
+
+.accueil .highlight {
+    color: var(--primary-color);
+}
+
+.accueil .ciel{
+    color: rgba(97, 222, 254, 1);
+
+}
+
+.catalogue {
+    margin-top: 80px;
+    overflow-y: scroll;
+    height: 100vh;
+    
+}
+
+
+
+.pubText{
+    background-color: rgba(128, 128, 128, 0.403);
+    margin-left: 20px;
+    max-width: 35%;
+    padding: 15px 10px;
+    border-radius: 0 15px 15px 0;
+    font-size: 0.6rem;
+    font-family: fantasy;
+    font-style: italic;
+}
+
+.accueil footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 8px;
+    align-items: center;
+    font-size: 10px;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.autrePage{
+    padding-right: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.autrePage a{
+    color: var(--secondary-color); 
+}
+
+.autrePage a:hover{
+    color: aqua; 
+}
+
+.minibarre-bleue{
+    height: 10px;
+    width: 1px;
+    margin:5px;
+    background-color: var(--secondary-color);
+}
+
+.socials a img {
+    background-color: rgba(186, 186, 186, 0.321);
+    border-radius: 50%;
+    padding: 10px;
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+}
+
+.socials a img:hover{
+    background-color: rgba(186, 186, 186, 0.133);
+}
+
+/************************** Responsive Design ***********************************/
+
+
+@media (max-width: 900px){
+    .logo img{
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .minibarre{
+        background-color: white;
+        height: 15px;
+        width: 1px;
+    }
+}
+@media (max-width: 800px) {
+    .auth-button{
+        display: none;
+    }
+    nav{
+        width: 40px;
+        z-index: 15;
+    }
+    .auth-option{
+        display: inline;
+    }
+    .menu {
+        display: flex;
+        flex-direction: column;
+        
+        position: fixed;
+        top: 80px;
+        right: 0;
+        border-radius: 5px;
+        height: 0;
+        transition: all 0.3s ease-in-out;
+        z-index: 15;
+        overflow: hidden;
+        width: 100vw;
+        text-transform: uppercase;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .menu li{
+        background-color: rgba(128, 128, 128, 0.313);
+        padding: 10px;
+        width: 100vw;
+    }
+
+    .menu li a{
+        width: 100vw;
+    }
+    .minibarre{
+        display: none;
+    }
+
+    .menu.active {
+        height: 200px;
+        padding: 20px 5px;
+    }
+    .logo img{
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+    .accueil .content .Slogan{
+        font-size: 2.3em;
+        font-weight: bold;
+        max-width: 90%;
+        margin-left: 20px;
+    }
+    .pubText{
+        max-width: 50%;
+    }
+    .accueil footer{
+        font-size: 6px;
+    }
+    
+    .minibarre-bleue{
+        height: 10px;
+        width: 1px;
+        margin:5px;
+        background-color: var(--secondary-color);
+    }
+    
+    .socials a img {
+        background-color: rgba(186, 186, 186, 0.321);
+        border-radius: 50%;
+        padding: 5px;
+        width: 10px;
+        height: 10px;
+        object-fit: cover;
+    }
+
+}
+
+
+/* Styles pour la modale d'image */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.image-modal-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+.image-close-button {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    color: #f1f1f1;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.image-close-button:hover {
+    color: #999;
+}
+
+.favorite-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 3;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorite-icon:hover {
+    color: rgba(255, 0, 0, 0.7);
+}
+
+.favorite-icon.active {
+    color: red;
+}
+
+.favorite-icon.active:hover {
+    color: darkred;
+}

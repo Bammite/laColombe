@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Devis</title>
+    <link rel="stylesheet" href="./css/devis.css">
+    <link rel="shortcut icon" type="x-icon" href="./asset/svg/icon.svg">
+
+</head>
+<body>
+    <!-- Fenêtre modale pour demander le titre du devis -->
+    <div id="modalTitre" class="modal">
+        <div class="modal-content">
+            <h2>Entrez le titre du devis</h2>
+            <input type="text" class="enteteDevis" id="titreDevis" placeholder="Titre du devis">
+            <button id="validerTitre">Valider</button>
+        </div>
+    </div>
+
+    <!-- Conteneur principal -->
+    <div id="devisContainer">
+        <header id="enteteDevis">
+            <img src="./asset/svg/LogoLaColombe.svg" alt="" class="logo">
+            <span class="infos">
+                <span>NIF 600071615</span>
+                <span>CPTE BCC N° 37119928701-62</span>
+                <span>CPTE CBT N° 3710273980108</span>
+                <span>CPTE UBA N° 70101600596-4</span>
+            </span>
+        </header>
+
+        <div class="bar"></div>
+        <div class="space1"></div>
+        <div class="space1"></div>
+        <div class="bar"></div>
+        
+        <main>
+            <h1 class="titreDevisAffiche" id="titreDevisAffiche"></h1>
+            <button id="ajouterBloc">Ajouter un Bloc</button>
+            <div id="blocsContainer"></div>
+        </main>
+
+        <footer>
+            <h3 id="totalDevis">Total du devis : 0 Fcfa</h3>
+        </footer>
+    </div>
+
+    <script src="./js/devis.js"></script>
+</body>
+</html>

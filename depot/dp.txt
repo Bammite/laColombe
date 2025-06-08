@@ -1,0 +1,105 @@
+on a ces schema de données:
+
+const PersonnelSchema = new mongoose.Schema({
+    nom: { type: String, required: true },
+    prenom: { type: String, required: true },
+    sexe: {type: String,enum: ['M','F'], required: true},
+    email: { type: String, required: true },
+    telephone: { type: String, required: true },
+    adresse: { type: String, required: true },
+    role: { type: String, enum: ['Employé', 'Client', 'Partenaire'], required: true },
+    dateNaissance: { type: Date, required: false }, // Date de naissance
+    numeroCarteIdentite: { type: String, required: false }, // Numéro de carte d'identité
+    typeContrat: { type: String, enum: ['CDI', 'CDD', 'Freelance', 'Stage'], required: function() { return this.role === 'Employé'; } }, // Type de contrat pour les employés
+    dateEmbauche: { type: Date, required: function() { return this.role === 'Employé'; } }, // Date d'embauche pour les employés
+    salaire: { type: Number, required: function() { return this.role === 'Employé'; } }, // Salaire pour les employés
+    poste: { type: String, required: function() { return this.role === 'Employé'; } }, // Poste pour les employés
+    departement: { type: String, required: function() { return this.role === 'Employé'; } }, // Département pour les employés
+    statut: { type: String, enum: ['Actif', 'Inactif'], default: 'Actif' }, // Statut de la personne
+    grade: {type: String, enum:['Non autorise','Elementaire', 'Superieur', 'Absolut'], default: 'Non autorise'},
+    photo: { type: String, required: false }, // URL de la photo de profil
+    historiqueProjets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Projet' }], // Projets associés
+    historiqueVentes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Vente' }], // Ventes associées
+    notes: { type: String, required: false }, // Notes supplémentaires
+    dateCreation: { type: Date, default: Date.now }, // Date de création de l'enregistrement
+    dernierAcces: { type: Date, required: false } // Dernière connexion ou accès
+},
+{timestamps: true});
+module.exports = mongoose.model('Personnel', PersonnelSchema);
+
+const UserSchema = new mongoose.Schema({
+    nomUser: { type: String, required: true },
+    emailUser: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    personnelAssocie: {type: mongoose.Schema.Types.ObjectId, ref: 'Personnel', default: '' }
+},
+{timestamps: true}
+);
+
+module.exports = mongoose.model('User', UserSchema);
+
+const ProjetSchema = new mongoose.Schema({
+    partenaire: { type: String, required: true },
+    budget: { type: Number, required: true },
+    Pourcentage: { type: Number, required: true },
+    dateSignature: { type: Date, default: Date.now },
+    dateEcheance: { type: Date, required: true },
+    statut: { type: String, enum: ['En cours', 'En attente', 'Annulé', 'Terminé'], default: 'En cours' },
+    depenses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'DepenseSchema', default: [] }],
+    description: { type: String, required: true },
+    idParticipantsPersonnel: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Personnel', default: [] }], // Liste des membres du personnel ayant participé
+    Taches: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TachePersonnele', default: [] }], //Liste des tâches à faire
+    priorité: { type: String, enum: ['Mineur', 'Intermédiaire', 'Majeur'], required: true },
+    responsable: { type: String, required: true },
+    type: { type: String, required: true },
+    image: { type: String, default: './asset/image/DefautProjet.jpg' },
+    profit: { type: Number, default: 0 },
+    
+}, { timestamps: true });
+
+
+je veux que tu complete le code de cette route :
+
+// Route pour récupérer les données de l'utilisateur connecté et son personnel associé
+router.get('/api/user', async (req, res) => {
+    if (!req.session.user || !req.session.user.id) {
+        return res.status(401).json({
+            success: false,
+            message: 'Utilisateur non connecté'
+
+        });
+    }
+
+    try {
+        // Récupérer l'utilisateur avec le personnel associé
+        const user = await User.findById(req.session.user.id)
+        .populate('personnelAssocie');
+        
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'Utilisateur non trouvé'
+            });
+        }
+
+        // Fusionner les données utilisateur et personnel
+        const responseData = {
+            ...user.toObject(),
+            ...(user.personnelAssocie ? user.personnelAssocie.toObject() : {})
+        };
+
+        res.status(200).json({
+            success: true,
+            user: responseData
+        });
+
+    } catch (err) {
+        console.error('Erreur lors de la récupération des données:', err);
+        res.status(500).json({
+            success: false,
+            message: 'Erreur serveur'
+        });
+    }
+});
+
+pour quelle recupere egalement les projet ou le personnelAssocie fais partie des participants(user.personnelAssocie est dans la table idParticipantsPersonnel d'un projet)

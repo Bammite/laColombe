@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord - lacolombe</title>
+    <link rel="stylesheet" href="./css/tableauDeBord.css">
+    <link rel="stylesheet" href="./css/accueil.css">
+    <link rel="stylesheet" href="./css/facture.css">
+    <link rel="stylesheet" href="./css/analyse.css">
+    <link rel="stylesheet" href="./css/message.css">
+    <link rel="stylesheet" href="./css/rapport.css">
+    <link rel="stylesheet" href="./css/confirmation.css">
+    <link rel="stylesheet" href="./css/generale.css">
+    <link rel="stylesheet" href="./css/fenetre.css">
+    <link rel="shortcut icon" type="x-icon" href="./asset/svg/icon.svg">
+    <link rel="stylesheet" href="./css/personnele.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/boutiqueManage.css">
+</head>
+<body>
+    <button class="menu-btn" id="menuBtn">
+        <img src="./asset/svg/burger.svg" alt="">
+    </button>
+    <div id="confirmationModal" class="modalC">
+        <div class="modal-content">
+          <div class="icon-container">
+            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+          </div>
+          <p class="message" id="messageDeConfirmation">Action effectuer</p>
+        </div>
+    </div>
+    <div id="modal-publication" class="modal">
+        <div class="modal-content">
+            <span class="close-actualite close-button">&times;</span>
+            <span class="formeModal1 formeActualité">
+                <p>Ajouter une Publication</p> 
+                <form id="publ" method="POST" enctype="multipart/form-data" >
+                    <textarea name="text" placeholder="Texte de la publication" cols="30" rows="5" id="contenue"></textarea>
+                    <input type="submit" class="soumetre" value="Publier">
+                    <input type="reset" value="Effacer" class="reset">
+                </form>
+            </span>
+            <!-- Second bloc -->
+            <span class="formeModal1 formeSendMessage">
+                <p>Envoyer a <span id="Destinateur"></span></p>
+                <form id="publ" method="POST" enctype="multipart/form-data" action="/addActualites">
+                    <textarea name="text" placeholder="Votre message" cols="30" rows="5"></textarea>
+                    <input type="submit" class="soumetre" value="Publier">
+                    <input type="reset" value="Effacer" class="reset">
+                </form>
+            </span>
+
+            <span class="formeModal1 formeAddArticle">
+                <p>Ajouter un Nouvel Article</p>
+                <form id="articleForm" enctype="multipart/form-data">
+                    <label for="titre">Titre :</label>
+                    <input type="text" id="titre" name="titre" required><br><br>
+
+                    <label for="CategorieArticle">categorie :</label>
+                    <select name="CategorieArticle" id="CategorieArticle">
+                        <option value="" disabled selected>Choisissez une catégorie</option>
+                        <option value="Porte">Porte</option>
+                        <option value="Fenetre">Fenetre</option>
+                        <option value="Meuble">Meuble</option>
+                        <option value="Materiaux">Materiaux</option>
+                        <option value="Eclairage">Eclairage</option>
+                        <option value="Autres">Autres</option>
+                    </select>
+                    
+                    <br><br>
+                
+                    <label for="prix">Prix :</label>
+                    <input type="number" id="prix" name="prix" required><br><br>
+                
+                    <label for="stock">Stock :</label>
+                    <input type="number" id="stock" name="stock" required><br><br>
+                
+                    <label for="image">Image :</label>
+                    <input type="file" id="image" name="image" accept="image/*"><br><br>
+                
+                    <label for="description">Description :</label>
+                    <textarea id="description" name="description" required></textarea><br><br>
+                
+                    <button type="submit">Ajouter l'Article</button>
+                </form>
+            </span>
+
+            <span class="formeModal1 formeAddDepense">
+                <p>Ajout d'une depense</p>
+                <form id="depenseForm" >
+                    <label for="categorie">Catégorie :</label>
+                    <select id="categorieDepense" name="categorie" required>
+                        <option value="" disabled selected>Choisissez une catégorie</option>
+                        <option value="Nourriture">Nourriture</option>
+                        <option value="Soin">Soin</option>
+                        <option value="Électricité">Électricité</option>
+                        <option value="Eau">Eau</option>
+                        <option value="Matériaux de construction">Matériaux de construction</option>
+                        <option value="Outils">Outils</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Logistique">Logistique</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Ressources Humaines">Ressources Humaines</option>
+                        <option value="Technologie">Technologie</option>
+                        <option value="Entretien">Entretien</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                    <br><br>
+
+                    <label for="descriptionDepense">Description :</label>
+                    <textarea id="descriptionDepense" name="description" required></textarea>
+                    <br><br>
+            
+                    <label for="montant">Montant :</label>
+                    <input type="number" id="montant" name="montant" required><br><br>
+            
+                    <label for="date">Date :</label>
+                    <input type="date" id="date" name="date" required><br><br>
+            
+                    <label for="fournisseur">Fournisseur :</label>
+                    <input type="text" id="fournisseur" name="fournisseur" required><br><br>
+            
+                    <label for="modePaiement">Mode de Paiement :</label>
+                    <input type="text" id="modePaiement" name="modePaiement" required><br><br>
+            
+                    <label for="projetAssocie">Projet Associé :</label>
+                    <input type="text" id="projetAssocie" name="projetAssocie" required><br><br>
+            
+                    <button type="submit">Ajouter la Dépense</button>
+                </form>
+            </span>
+            <span class="formeModal1 formeAddEmploye">
+                <p>Ajouter un employé</p>
+                <form id="personnelForm" enctype="multipart/form-data">
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom-Employe" name="nom" required><br><br>
+            
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" id="prenom-Employe" name="prenom" required><br><br>
+
+                    <label for="sexe">Sexe:</label>
+                    <select id="sexe-Employe" name="sexe" required>
+                        <option value="" disabled selected>Choisissez le Sexe</option>
+                        <option value="M">Maxculin</option>
+                        <option value="F">Feminin</option>
+                    </select>
+                    <br><br>
+            
+                    <label for="email">Email :</label>
+                    <input type="email" id="email-Employe" name="email" required><br><br>
+            
+                    <label for="telephone">Téléphone :</label>
+                    <input type="text" id="telephone-Employe" name="telephone" required><br><br>
+            
+                    <label for="adresse">Adresse :</label>
+                    <input type="text" id="adresse-Employe" name="adresse" required><br><br>
+            
+                    <label for="role">Rôle :</label>
+                    <select id="role-Employe" name="role" required>
+                        <option value="" disabled selected>Choisissez un rôle</option>
+                        <option value="Employé">Employé</option>
+                        <option value="Client">Client</option>
+                        <option value="Partenaire">Partenaire</option>
+                    </select>
+                    <br><br>
+            
+                    <label for="dateNaissance">Date de Naissance :</label>
+                    <input type="date" id="dateNaissance-Employe" name="dateNaissance"><br><br>
+            
+                    <label for="numeroCarteIdentite">Numéro de Carte d'Identité :</label>
+                    <input type="text" id="numeroCarteIdentite-Employe" name="numeroCarteIdentite"><br><br>
+            
+                    <label for="typeContrat">Type de Contrat :</label>
+                    <select id="typeContrat-Employe" name="typeContrat">
+                        <option value="" disabled selected>Choisissez un type de contrat</option>
+                        <option value="CDI">CDI</option>
+                        <option value="CDD">CDD</option>
+                        <option value="Freelance">Freelance</option>
+                        <option value="Stage">Stage</option>
+                    </select>
+                    <br><br>
+            
+                    <label for="dateEmbauche">Date d'Embauche :</label>
+                    <input type="date" id="dateEmbauche-Employe" name="dateEmbauche"><br><br>
+            
+                    <label for="salaire">Salaire :</label>
+                    <input type="number" id="salaire-Employe" name="salaire"><br><br>
+            
+                    <label for="poste">Poste :</label>
+                    <input type="text" id="poste-Employe" name="poste"><br><br>
+            
+                    <label for="departement">Département :</label>
+                    <input type="text" id="departement-Employe" name="departement"><br><br>
+            
+                    <label for="statut">Statut :</label>
+                    <select id="statut-Employe" name="statut">
+                        <option value="Actif" selected>Actif</option>
+                        <option value="Inactif">Inactif</option>
+                    </select>
+                    <br><br>
+            
+                    <label for="photo">Photo (URL) :</label>
+                    <input id="photo-Employe" type="file" accept="image/*" name="photo"><br><br>
+            
+                    <label for="notes">Notes :</label>
+                    <textarea id="notes-Employe" name="notes"></textarea><br><br>
+            
+                    <button type="submit">Ajouter le Membre</button>
+                </form>
+            </span>
+
+            <span class="formeModal1 formeAddVente">
+                <p>Enregistrer une Vente</p>
+                <form id="venteForm">
+                    <label for="client">Nom du Client :</label>
+                    <input type="text" id="client" name="client" required><br><br>
+            
+                    <label for="produitId">Produit :</label>
+                    <select id="produitId" name="produitId" required>
+                        <option value="" disabled selected>Choisissez un produit</option>
+                        <!-- Les options seront ajoutées dynamiquement via JavaScript -->
+                    </select>
+                    <br><br>
+
+                   
+            
+                    <label for="quantité">Quantité :</label>
+                    <input type="number" id="quantité" name="quantité" required><br><br>
+
+                    <label for="dateVente">Date :</label>
+                    <input type="date" id="dateVente" name="dateVente" required><br><br>
+            
+                    <label for="paiement">Montant:</label>
+                    <input type="number" id="paiement" name="paiement" required><br><br>
+            
+                    <label for="via">Paiement Via :</label>
+                    <input type="text" id="via" name="via" required><br><br>
+            
+                    <label for="livraison">Mode de Livraison :</label>
+                    <input type="text" id="livraison" name="livraison" required><br><br>
+            
+                    <button type="submit">Enregistrer la Vente</button>
+                </form>
+            </span>
+
+            <span class="formeModal1 formeModifyArticle">
+                <p>Modifier l'Article</p>
+                <form id="modifyArticleForm" enctype="multipart/form-data">
+                    <input type="hidden" id="modifyArticleId" name="articleId">
+                    <label for="titreMod">Titre :</label>
+                    <input type="text" id="titreMod" name="titre" required><br><br>
+
+                    <label for="CategorieArticleMod">Catégorie :</label>
+                    <select name="categorieArticle" id="CategorieArticleMod">
+                        <option value="Porte">Porte</option>
+                        <option value="Fenetre">Fenetre</option>
+                        <option value="Meuble">Meuble</option>
+                        <option value="Materiaux">Materiaux</option>
+                        <option value="Eclairage">Eclairage</option>
+                        <option value="Autres">Autres</option>
+                    </select><br><br>
+                
+                    <label for="prixMod">Prix :</label>
+                    <input type="number" id="prixMod" name="prix" required><br><br>
+                
+                    <label for="stockMod">Stock :</label>
+                    <input type="number" id="stockMod" name="stock" required><br><br>
+                
+                    <label for="imageMod">Nouvelle Image :</label>
+                    <input type="file" id="imageMod" name="image" accept="image/*"><br><br>
+                
+                    <label for="descriptionMod">Description :</label>
+                    <textarea id="descriptionMod" name="description" required></textarea><br><br>
+                
+                    <button type="submit">Mettre à jour</button>
+                </form>
+            </span>
+
+            <span class="formeModal1 formeFichedePaie">
+                <p>Ajouter une fiche de paie</p>
+                <form id="FicheDePaie">
+                    <label for="titreMod">Employé</label>
+                    <select name="idEmployé" id="idEmployé">
+                        <option value="">Choisire l'employé</option>
+                    </select>
+                    <br><br>
+                    <label for="datePaiement">Date de paiement </label>
+                    <input type="date" id="datePaiement" name="datePaiement" required><br><br>
+                    <label for="TypeDePaie">Type de Paie</label>
+                    <select name="TypeDePaie" id="TypeDePaie">
+                        <option value="Salaire">Salaire</option>
+                        <option value="Prime">Prime</option>
+                    </select><br><br>
+                    <label for="Periode">Periode: </label>
+                    <label for="debutPeriode">Debut: </label>
+                    <input type="date" id="debutPeriode" name="debutPeriode" required>
+                    <label for="finPeriode">Fin: </label>
+                    <input type="date" id="finPeriode" name="finPeriode" required><br><br>
+                
+                    <label for="stockMod">Mode de paiement <label>
+                    <input type="text" id="ModePaiement-FicheDePAie" name="ModePaiement-FicheDePAie" required><br><br>
+                
+                    <button type="submit">Enregistrer</button>
+                </form>
+            </span>
+
+            <span class="formeModal1 formeRapport">
+                <p>Ajouter un rapport </p>
+                <div class="upload-card">
+                    <form id="uploadForm" class="report-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="reference">Référence*</label>
+                            <input type="text" id="reference" name="reference" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reportDate">Date du rapport*</label>
+                            <input type="date" id="reportDate" name="reportDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Catégorie*</label>
+                            <select id="category" name="category" required>
+                                <option value="">Sélectionner...</option>
+                                <option value="Financier">Financier</option>
+                                <option value="Technique">Technique</option>
+                                <option value="Audit">Audit</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group file-upload">
+                            <label for="rapport">Fichier PDF*</label>
+                            <input type="file" id="rapport" name="rapport" accept="application/pdf" required>
+                            <div class="file-info" id="fileInfo">Aucun fichier sélectionné</div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span id="submitText">Envoyer le rapport</span>
+                            <div id="loadingSpinner" class="spinner hidden"></div>
+                        </button>
+                    </form>
+                </div>
+            </span>
+
+
+            <span class="formeModal1 formeModifierEmploye">
+                <p>Ajouter un employé</p>
+                <form id="personnelForm-Modif" enctype="multipart/form-data">
+                    <input type="text" readonly required id="idEmploye">
+                    <label for="nom-Modif">Nom :</label>
+                    <input type="text" id="nom-Employe-Modif" name="nom-Modif" required><br><br>
+            
+                    <label for="prenom-Modif">Prénom :</label>
+                    <input type="text" id="prenom-Employe-Modif" name="prenom-Modif" required><br><br>
+
+                    <label for="sexe-Employe-Modif">Sexe:</label>
+                    <select id="sexe-Employe-Modif" name="sexe-Employe-Modif" required>
+                        <option value="" disabled selected>Choisissez le Sexe</option>
+                        <option value="M">Maxculin</option>
+                        <option value="F">Feminin</option>
+                    </select>
+                    <br><br>
+            
+                    <label for="email-Modif">Email :</label>
+                    <input type="email" id="email-Employe-Modif" name="email-Modif" required><br><br>
+            
+                    <label for="telephone-Modif">Téléphone :</label>
+                    <input type="text" id="telephone-Employe-Modif" name="telephone-Modif" required><br><br>
+            
+                    <label for="adresse-Modif">Adresse :</label>
+                    <input type="text" id="adresse-Employe-Modif" name="adresse-Modif" required><br><br>
+            
+                    <label for="role-Modif">Rôle :</label>
+                    <select id="role-Employe-Modif" name="role-Modif" required>
+                        <option value="" disabled selected>Choisissez un rôle</option>
+                        <option value="Employé">Employé</option>
+                        <option value="Client">Client</option>
+                        <option value="Partenaire">Partenaire</option>
+                    </select>
+                    <br><br>
+            
+                    <label for="dateNaissance-Employe-Modif">Date de Naissance :</label>
+                    <input type="date" id="dateNaissance-Employe-Modif" name="dateNaissance-Employe-Modif"><br><br>
+            
+                    <label for="numeroCarteIdentite-Modif">Numéro de Carte d'Identité :</label>
+                    <input type="text" id="numeroCarteIdentite-Employe-Modif" name="numeroCarteIdentite-Modif"><br><br>
+            
+                    <label for="typeContrat">Type de Contrat :</label>
+                    <select id="typeContrat-Employe-Modif" name="typeContrat-Modif">
+                        <option value="" disabled selected>Choisissez un type de contrat</option>
+                        <option value="CDI">CDI</option>
+                        <option value="CDD">CDD</option>
+                        <option value="Freelance">Freelance</option>
+                        <option value="Stage">Stage</option>
+                    </select>
+                    <br><br>
+            
+                    <label for="dateEmbauche-Modif">Date d'Embauche :</label>
+                    <input type="date" id="dateEmbauche-Employe-Modif" name="dateEmbauche-Modif"><br><br>
+            
+                    <label for="salaire-Modif">Salaire :</label>
+                    <input type="number" id="salaire-Employe-Modif" name="salaire-Modif"><br><br>
+            
+                    <label for="poste-Modif">Poste :</label>
+                    <input type="text" id="poste-Employe-Modif" name="poste-Modif"><br><br>
+            
+                    <label for="departement-Modif">Département :</label>
+                    <input type="text" id="departement-Employe-Modif" name="departement-Modif"><br><br>
+            
+                    <label for="statut-Modif">Statut :</label>
+                    <select id="statut-Employe-Modif" name="statut-Modif">
+                        <option value="Actif" selected>Actif</option>
+                        <option value="Inactif">Inactif</option>
+                    </select>
+                    <br><br>
+
+                    <label for="grade-Modif">Grade :</label>
+                    <select id="grade-Employe-Modif" name="grade-Modif">
+                        <option value="">Choisissez un grade</option>
+                        <option value="Non autorise">Non autorise</option>
+                        <option value="Elementaire">Elementaire</option>
+                        <option value="Superieur">Superieur</option>
+                        <option value="Absolut">Absolut</option>
+                    </select>
+                    <br><br>
+
+
+                    <label for="photo-Modif">Photo (URL) :</label>
+                    <input id="photo-Employe-Modif" type="file" accept="image/*" name="photo-Modif"><br><br>
+            
+                    <label for="notes-Modif">Notes :</label>
+                    <textarea id="notes-Employe-Modif" name="notes-Modif"></textarea><br><br>
+            
+                    <button type="submit">Mettre à jour</button>
+                </form>
+            </span>
+            
+        </div> 
+    </div>
+    <div class="all">
+        <div class="tableauDeBord" id="tableauDeBord">
+            <div class="tableauDeBord__content">
+                <div class="tableauDeBord__header">
+                    <h1>Tableau de Bord</h1>
+                </div>
+                <div class="opt opt--noir">
+                    <img src="./asset/svg/home.svg" alt="">
+                    <span>Acceuil</span>
+                </div>
+                <div class="opt opt--noir">
+                    <img src="./asset/svg/boitmessage.svg" alt="">
+                    <span>Boite de réception</span>
+                </div>
+                <div class="opt opt--noir">
+                    <img src="./asset/svg/projet.svg" alt="">
+                    <span>Projet</span>
+                </div>
+                <div class="opt opt--noir">
+                    <img src="./asset/svg/ajout.svg" alt="">
+                    <span>Entrée & Sortie</span>
+                </div>
+                <div class="opt opt--noir">
+                    <img src="./asset/svg/gestion.svg" alt="">
+                    <span>Gestion des entrées</span>
+                </div>
+                
+
+                <div class="defilant">
+                    <span class="textDefil opt--noir" id="textDefil"><img src="./asset/svg/marketOrange.svg" alt="">
+                    <span>Gestion de la Boutique</span> </span> 
+                    <div class="defilant__content">
+                        <div class="opt opt--noir">
+                            <img src="./asset/svg/chairOrange.svg" alt="">
+                            <span>Articles</span>
+                        </div>
+                        <div class="opt opt--noir">
+                            <img src="./asset/svg/pannierOrange.svg" alt="">
+                            <span>Commandes</span>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="opt opt--noir">
+                    <img src="./asset/svg/analyse.svg" alt="">
+                    <span>Analyse & bilan</span>
+                </div>
+                <div class="opt opt--noir">
+                    <img src="./asset/svg/raport.svg" alt="">
+                    <span>Rapport</span>
+                </div>
+                <div class="opt opt--noir">
+                    <img src="./asset/svg/colaborateur.svg" alt="">
+                    <span>Equipe</span>
+                </div>
+                <!-- <div class="opt opt--noir">
+                    <img src="./asset/svg/parametre.svg" alt="">
+                    <span>Parametre</span>
+                </div>
+                <div class="opt opt--noir">
+                    <img src="./asset/svg/profile.svg" alt="">
+                    <span>Mon Profile</span>
+                </div> -->
+                
+            </div>
+
+            <div class="tableauDeBord__footer">
+                <a href="#">Centre d'aide</a>
+                <div class="barVerticale"></div>
+                <a href="#">Condition d'utilisation</a>
+            </div>
+        </div>
+        <div class="section" id="accueil">
+            <a href="./profile" class="profileLink"><img src="" id="profileUser" alt=""></a>
+            <div class="enteteAcc">
+                <h2 id="Salutation"></h2>
+                <button id="addActu" onclick="openModal(modalActu,'formeActualité');"><img src="./asset/svg/ajout2.svg" alt="" ></button>
+            </div>
+            <div class="actuBox">
+                <div class="actuBox_content" id="actuBox_content">
+                    <!-- <span>
+                        Reuinions de toutes l'equipe a 18h chez le RH
+                        <div class="gestionTache">
+                            <button>Fermer</button>
+                            <button>Supprimer</button>
+                        </div>
+                    </span> -->
+                  
+                </div>
+            </div>
+            <div class="taches">
+                <div class="TacheEnt">
+                    <p>Mes taches </p>
+                    <button id="ouvFrmTache">Ajouter</button>
+                </div>
+                <div class="AddTacheForm" id="AddTacheForm">
+                    <form action="" id="AddTache">
+                        <input type="text" name="NewTache" id="NewTache" placeholder="Nouvelle tache">
+                        <button type="submit">Ajouter</button>
+                    </form>
+                </div>
+                <div class="tacheList" id="tacheList">
+                    <div class="tacheItem">
+                        <input type="checkbox" id="tache1" class="custom-checkbox">
+                        <label for="tache1">Préparer la réunion</label>
+                    </div>
+                    <div class="tacheItem">
+                        <input type="checkbox" id="tache2" class="custom-checkbox">
+                        <label for="tache2">Envoyer les emails</label>
+                    </div>
+                    <div class="tacheItem">
+                        <input type="checkbox" id="tache3" class="custom-checkbox">
+                        <label for="tache3">Finaliser le rapport</label>
+                    </div>
+                    <div class="tacheItem">
+                        <input type="checkbox" id="tache4" class="custom-checkbox">
+                        <label for="tache4">Appeler le client</label>
+                    </div>
+                </div>
+
+            
+            
+            </div>
+        </div>
+        <div class="section sc" id="BtRcp">
+            <h2>Boîte de réception</h2>
+            
+            <div class="messages-container">
+                <div class="messages-header">
+                    <div class="header-email">Email</div>
+                    <div class="header-message">Message</div>
+                    <div class="header-date">Date</div>
+                </div>
+                
+                <div class="messages-list">
+                    <!-- Les messages seront chargés ici dynamiquement -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal pour voir un message complet -->
+        <div id="messageModal" class="modal2">
+            <div class="modal-content2">
+                <span class="close-modal2">&times;</span>
+                <h3 id="modalEmail"></h3>
+                <p class="modal-date" id="modalDate"></p>
+                <div class="modal-message" id="modalMessage"></div>
+            </div>
+        </div>
+
+        <div class="section sc" id="projet">
+            <h1 title="TitleProjet">Gestion des projets</h1>
+            <div class="contente" id="projetContent">
+
+                
+                <div class="cadre">
+                    <a href="./newProjet.html">
+                        <div class="cadre_content addProjet">
+                            <span>+</span>
+                        </div>
+                        <p>Creer un nouveau projet</p> 
+                    </a>
+
+                </div>
+                <div class="cadre">
+                    <div class="cadre_content">
+                       <a href="./projet.html" class="paie">
+                        
+                            <div class="titreCarte">
+                                <span>
+                                    Contruction de cabinet
+                                </span>
+                                <br>
+                                <span>15/04/2025</span>
+                            </div>
+                        </a>
+                    </div>
+                    <p>Prince BAMMITE</p> 
+                </div>
+
+                <div class="cadre">
+                    <div class="cadre_content">
+                       <a href="./projet.html" class="facture">
+                        
+                            <div class="titreCarte">
+                                <span>Achat Porte</span>
+                                <br>
+                                <span>15/04/2025</span>
+                            </div>
+                        </a>
+                    </div>
+                    <p>Prince BAMMITE</p> 
+                </div>
+
+
+                <div class="cadre">
+                    <div class="cadre_content">
+                       <a href="./facture.html" class="devis">
+                            <div class="titreCarte">
+                                <span>Renauvation</span>
+                                <br>
+                                <span>15/04/2025</span>
+                            </div>
+                        </a>
+                    </div>
+                    <p>Prince BAMMITE</p> 
+                </div>
+                <div class="cadre">
+                    <div class="cadre_content">
+                       <a href="./facture.html" class="devis">
+                            <div class="titreCarte">
+                                <span>Amenagement exterieur</span>
+                                <br>
+                                <span>15/04/2025</span>
+                            </div>
+                        </a>
+                    </div>
+                    <p>Prince BAMMITE</p> 
+                </div>
+                
+            </div>
+        </div>
+        <div class="section sc" id="Entrée">
+            <h1 title="TitleNvEntree">Gestion des Entrées & Sorties</h1>
+            <div class="contente">
+                <div class="cadre" onclick="openModal(modalActu,'formeAddVente')">
+                    <div class="cadre_content">
+                    <div class="facture" >
+                            <!-- <div class="titreCarte">
+                                <span>Achat Porte</span>
+                                <br>
+                                <span>15/04/2025</span>
+                            </div> -->
+                        </div>
+                    </div>
+                    <p>Enregistrer une vente</p> 
+                </div>
+
+                <div class="cadre">
+                    <div class="cadre_content" onclick="openModal(modalActu,'formeAddDepense')">
+                    <div class="facture">
+                        
+                            
+                    </div>
+                    </div>
+                    <p>Enregistrer une depense</p> 
+                </div>
+
+
+                <div class="cadre">
+                    <div class="cadre_content">
+                    <a href="./CreerDevis.html" class="devis" target="_blank" rel="noopener noreferrer">
+                            <!-- <div class="titreCarte">
+                                <span>Achat Porte</span>
+                                <br>
+                                <span>15/04/2025</span>
+                            </div> -->
+                        </a>
+                    </div>
+                    <p>Creer une facture</p> 
+                </div>
+                <div class="cadre">
+                    <div class="cadre_content">
+                    <a href="./CreerDevis.html" class="devis" target="_blank" rel="noopener noreferrer">
+                            <!-- <div class="titreCarte">
+                               <span>Achat Porte</span>
+                                <br>
+                                <span>15/04/2025</span>
+                            </div> -->
+                        </a>
+                    </div>
+                    <p>Creer un devis</p> 
+                </div>
+                <div class="cadre">
+                    <div class="cadre_content" onclick="openModal(modalActu,'formeFichedePaie')">
+                    
+                    </div>
+                    <p>Enregistrer une fiche de Paie</p> 
+                </div>
+            </div>
+
+            <h1 class="TrtSt1">Precedene operation</h1>
+
+            <div class="contente 2" id="precedenteOperation">
+                <!-- <div class="cadre">
+                    <div class="cadre_content">
+                    <a href="./facture.html" class="facture">
+                            <div class="titreCarte">
+                                <span>Achat Porte</span>
+                                <br>
+                                <span>15/04/2025</span>
+                            </div>
+                        </a>
+                    </div>
+                    <p>Prince BAMMITE</p> 
+                </div> -->
+
+                
+            </div>
+
+        </div>
+        <div class="section" id="Devis">Gestion des e&s</div>
+        <div class="section" id="Boutique">
+            <div class="content">
+                <h2>Gestion de la boutique en ligne</h2>
+                <div class="GestionBoutique">
+                    <p class="nbArticle" id="nbArticle"> </p>
+                    <button onclick="openModal(modalActu,'formeAddArticle')">ajouter un article</button>
+                </div>
+
+                <h3>Vos Articles</h3>
+                <div class="articles">
+                    <div>
+                        <p>Auncun Article Disponible</p>
+                    </div>
+                    <!-- <div class="article">
+                        <img src="./asset/image/IMG_1202.PNG" class="ImageArticle" alt="Image de l'article">
+                        <div class="eyes">
+                            <button class="dispaly"><img src="./asset/svg/hidden.svg" alt=""></button>
+                        </div>
+                        <div class="info">
+                            <div class="nom">Marbre Vert (VIP)</div>
+                            <div class="prix">29 900 FCFA</div>
+                            <div class="detaile">
+                                <p>Commande : 8</p>
+                                <p>Appréciation : 30</p>
+                            </div>
+                            <div class="btn">
+                                <button class="btn-supprimer">Supprimer</button>
+                                <button class="btn-modifier">Modifier</button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="section sc" id="Commande">
+            <h1 title="TitleCommande">Gestion des Commandes</h1>
+            <div class="commande-container">
+                <div class="commande-header">
+                    <div class="commande-stats">
+                        <div class="stat-box">
+                            <h3>En attente</h3>
+                            <span class="stat-number" id="enAttente">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <h3>En préparation</h3>
+                            <span class="stat-number" id="enPreparation">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <h3>En livraison</h3>
+                            <span class="stat-number" id="enLivraison">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <h3>Livrées</h3>
+                            <span class="stat-number" id="livrees">0</span>
+                        </div>
+                    </div>
+                    <div class="commande-filters">
+                        <select id="filterStatus">
+                            <option value="all">Tous les statuts</option>
+                            <option value="En attente">En attente</option>
+                            <option value="Confirmée">Confirmée</option>
+                            <option value="En préparation">En préparation</option>
+                            <option value="En livraison">En livraison</option>
+                            <option value="Livrée">Livrée</option>
+                            <option value="Annulée">Annulée</option>
+                        </select>
+                        <input type="date" id="filterDate">
+                        <button class="filter-btn">Filtrer</button>
+                    </div>
+                </div>
+
+                <div class="commandes-list">
+                    <!-- Les commandes seront générées ici dynamiquement -->
+                </div>
+
+                <template id="commande-template">
+                    <div class="commande-card">
+                        <div class="commande-info">
+                            <div class="commande-header-card">
+                                <h3 class="commande-id">Commande #<span></span></h3>
+                                <span class="commande-date"></span>
+                            </div>
+                            <div class="commande-details">
+                                <div class="client-info">
+                                    <p><strong>Client:</strong> <span class="client-nom"></span></p>
+                                    <p><strong>Tél:</strong> <span class="client-tel"></span></p>
+                                    <p><strong>Adresse:</strong> <span class="client-adresse"></span></p>
+                                </div>
+                                <div class="product-info">
+                                    <div>
+                                        <p class="product-name"></p>
+                                        <p class="product-quantity"></p>
+                                        <p class="product-total"></p>
+                                    </div>
+                                    <img class="product-image" src="" alt="Product">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commande-actions">
+                            <select class="status-select">
+                                <option value="En attente">En attente</option>
+                                <option value="Confirmée">Confirmée</option>
+                                <option value="En préparation">En préparation</option>
+                                <option value="En livraison">En livraison</option>
+                                <option value="Livrée">Livrée</option>
+                                <option value="Annulée">Annulée</option>
+                            </select>
+                            <button class="view-details-btn">Détails</button>
+                            <button class="print-btn">Imprimer</button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div class="section sc" id="Analyse">
+            <h1 class="titre" title="TitleAnalyse"><span>Analyse & Bilan</span> </h1>
+            <div class="space"></div>
+
+            <div class="content ">
+                <div class="space"></div>
+                <div class="analye a1 detailsTexte" id="DetailProjet">
+                    <!-- <select name="date" id="" class="infoAna">
+                        <option value="0">Aujourd'hui</option>
+                        <option value="1">Cette semaine</option>
+                        <option value="2">Ce mois</option>
+                        <option value="3">Cette année</option>
+                        <option value="4">Tout</option>
+                    </select> -->
+                    <span class="infoAna">Nombres de Projet: <span class="chiffre1">0</span></span>
+                    <span class="infoAna">Projet déjà traité: <span class="chiffre2">0</span></span>
+                    <span class="infoAna">Projet restant: <span class="chiffre3">0</span></span>
+                    <a href=""></a>
+                    <button onclick="openSection('Facture')">Details</button>
+                    
+                </div>
+                <div class="space1"></div>
+                <div class="bar"></div>
+                <h2>Visualisation de Entrée & Sortie</h2>
+                <div class="depenseRevenue">
+                    <div class="analye a2 detailsTexte">
+                        <!-- liste des entrées & sorties -->
+                         <div class="ListeTrfq">
+                            <!-- <div class="trfq depense">
+                                <span>-8500 fcfa</span>
+                                <span>(Achat de cable Ethernet)</span>
+                            </div>
+                            <div class="trfq revenue">
+                                <span>+2000 fcfa</span>
+                                <span>(Vente du fautueil Marbre)</span>
+                            </div> -->
+                         </div>
+                    </div>
+                    <span>
+                        <select name="date" id="" class="selectDate infoAna">
+                            <option value="0">Aujourd'hui</option>
+                            <option value="1">Cette semaine</option>
+                            <option value="2">Ce mois</option>
+                            <option value="3">Cette année</option>
+                            <option value="4">Tout</option>
+                        </select>
+                        <div class="chart-container">
+                        
+                            <canvas id="lineChart" aria-label="chart" role="img"></canvas>
+                        </div>   
+                    </span>
+                </div>
+                <div class="bar"></div>
+                <div class="categoriVente">
+                    <h2>Classification des ventes </h2>
+                    <div class="chart-container">
+                        
+                    <canvas id="barCanvas" aria-label="chart" role="img"></canvas>
+                </div>  
+                </div>
+
+                <div class="bar">
+                    
+                </div>
+                <div class="categorieDemografie">
+                    <h2>Demographie de l'agence</h2>
+                    <canvas id="DemographieCanvas" aria-label="chart" role="img"></canvas>
+                </div>
+
+            </div>
+            
+        </div>
+        <div class="section sc" id="Rapport">
+            <h1 title="TitleRapport">Gestion des Rapports</h1>
+            <div class="cadre">
+                <div class="cadre_content addRapport" onclick="openModal(modalActu,'formeRapport');">
+                    <span>+</span>
+                </div>
+                <p>Nouveau Rapport</p>
+            </div>
+            <div class="contente">
+                <!-- Cadre pour charger un nouveau rapport -->
+                
+               
+                <!-- Liste des rapports -->
+                    <div class="reports-list">
+                        <h3>Rapports disponibles</h3>
+                        <div class="list-header">
+                            <div class="header-item ref-col">Référence</div>
+                            <div class="header-item date-col">Date</div>
+                            <div class="header-item cat-col">Catégorie</div>
+                            <div class="header-item action-col">Actions</div>
+                        </div>
+                        <div id="reportsContainer" class="reports-container">
+                            <!-- Les rapports seront chargés ici -->
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="section sc" id="Employes">
+            <h1 class="titre" title="TitleEmployes"><span>Gestion des Employés</span></h1>
+            <div class="header-employes">
+                <h2><span id="employeeCount">0</span> Employés</h2>
+                <div class="actions">
+                    <button class="btn-filter">Filtrer</button>
+                    <button class="btn-add" onclick="openModal(modalActu,'formeAddEmploye')">+ Ajouter un Employé</button>
+                </div>
+            </div>
+            <div class="employee-grid">
+                <!-- Les cartes des employés seront générées ici dynamiquement -->
+            </div>
+        </div>
+        <!-- <div class="section" id="Parametre">Contenu des paramètres</div>
+        <div class="section" id="Profile">Contenu du profil</div> -->
+    </div>
+    <script src="./js/data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/analyse&Bilan.js"></script>
+    <script src="./js/message.js"></script>
+    <script src="./js/accueil.js"></script>
+    <script src="js/TableauDebord.js"></script>
+    <script src="./js/employes.js"></script>
+    <script src="./js/entreSortie.js"></script>
+    <script src="./js/form1.js"></script>
+    <script src="./js/rapport.js"></script>
+    <script src="./js/Boutique.js"></script>
+    <script src="./js/generale.js"></script>
+</body>
+</html>

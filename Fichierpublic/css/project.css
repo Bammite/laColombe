@@ -1,0 +1,278 @@
+:root {
+    --primary-color: rgba(206, 89, 26, 1);
+    --primary-color--sombre: rgb(111, 45, 9);
+    --secondary-color: rgba(6, 140, 249, 1);
+    --text-color: black;
+    --background-color: rgb(229, 245, 252);
+    --paddingOpt: 12px;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    color: #ce591a;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    font-size: 20px;
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+
+.action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.action img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.action p {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.contenu-projet .description,
+.contenu-projet .caracteristiques {
+    margin-bottom: 20px;
+}
+
+.description p{
+    text-align: justify;
+}
+
+.contenu-projet h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+.contenu-projet p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.caracteristiques ul {
+    list-style: none;
+    padding: 0;
+}
+
+.caracteristiques li {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.caracteristiques li strong {
+    font-weight: bold;
+}
+
+.barDeProgression {
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+    width: 100%;
+}
+
+.progress-bar{
+    background-color:rgb(221, 242, 249);
+    width: 90%;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: 0 12px 12px 0;
+}
+
+.progress{
+    background-color: var(--primary-color);
+    height: 40px;
+    border-radius: 0 12px 12px 0;
+}
+
+.progress-text{
+    background-color: rgb(214, 214, 214);
+    width: 60px;
+    height: 40px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+}
+
+
+/************************* taches *************************/
+
+.entete, .line{
+    display: flex;
+    height: 40px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.entete {
+    margin-bottom: 40px;
+}
+
+.entete span, .line span{
+    display: flex;
+    
+    align-items: center;
+    width: 90%;
+    margin-right: 20px;
+    background-color: rgb(214, 214, 214);
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.line span{
+    background-color: rgb(240, 240, 240);
+    font-weight: normal;
+    height: 50px;
+}
+
+.entete span .colonne, .line span .colonne{
+    padding: 10px;
+    text-align: center;
+}
+
+.entete span .c1, .line span .c1{
+    width: 40%;
+}
+.entete span .c2, .line span .c2{
+    width: 30%;
+}
+.entete span .c3, .line span .c3{
+    width: 30%;
+}
+
+.statuts{
+    background-color: rgb(214, 214, 214);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    border-radius: 6px;
+}
+
+.taches .line .statuts{
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    font-weight: normal;
+    height: 30px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.taches .line .statuts:hover{
+    background-color: rgb(221, 238, 252);
+
+}
+
+.taches .line{
+    align-items: center;
+}
+
+.ListeParticipant{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(370px, .1fr));
+    gap: 10px;
+}
+
+.participant{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    /* padding: 5px; */
+    height: 80px;
+    max-width: 400px;
+}
+
+.participant img{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px 0px 0px 8px;
+}
+
+.participant .info{
+    display: flex;
+}
+
+.participant .info .nom{
+    margin:3px 0px 0px 10px;
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--primary-color);
+}
+
+.participant .info .role{
+    margin-left: 10px;
+    color: black;
+}
+
+.participant .miniMenu{
+    margin-right: 10px;
+    cursor: pointer;
+    color: black;
+}
+
+.fait{
+    color: white;
+}
+
+.fait span{
+    background-color: green;
+}
+
+.taches .fait .statuts{
+    width: 100px;
+    color: black;
+}

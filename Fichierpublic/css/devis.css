@@ -1,0 +1,153 @@
+:root {
+    --primary-color: rgba(206, 89, 26, 1);
+    --primary-color--sombre: rgb(111, 45, 9);
+    --secondary-color: rgba(6, 140, 249, 1);
+    --text-color: black;
+    --background-color: rgb(229, 245, 252);
+    --paddingOpt: 12px;
+}
+
+*{
+    font-family: 'Inria Sans', sans-serif;
+    font-style: normal;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.bar{
+    height: 3px;
+    width: 100%;
+    margin: 10px 0;
+    background-color: black;
+}
+
+.space1{
+    height: 50px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#modalTitre {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    
+}
+
+#devisContainer {
+    padding: 20px;
+    background-color: rgba(242, 242, 242, 1);
+    margin: 0 auto;
+    width: 95%;
+    max-width: 842px;
+}
+
+
+
+#enteteDevis {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    height: 100px;
+    padding: 2px;
+}
+
+#enteteDevis img{
+    max-width: 50%;
+
+}
+
+#enteteDevis .infos{
+    max-width: 45%;
+    font-size: 15px;
+}
+
+.titreDevisAffiche{
+    text-align: center;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+#enteteDevis span{
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+}
+
+#blocsContainer {
+    margin-top: 20px;
+}
+
+.bloc {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.tableBloc {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableBloc th, .tableBloc td {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+}
+
+#ajouterBloc {
+    margin-bottom: 20px;
+}
+
+#totalDevis {
+    text-align: right;
+    margin-top: 20px;
+}
+
+#btnImprimer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#btnImprimer:hover {
+    background-color: var(--primary-color--sombre);
+}
+
+@media print {
+    #btnImprimer {
+        display: none;
+    }
+    body {
+        background: white;
+    }
+    #devisContainer {
+        width: 100%;
+        padding: 0;
+        background: none;
+    }
+}

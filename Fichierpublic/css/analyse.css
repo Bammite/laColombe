@@ -1,0 +1,226 @@
+
+
+#Analyse .titre{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    z-index: 10;
+    
+}
+
+#Analyse .titre span{
+    padding: 15px;
+    color: white;
+    background-color: var(--secondary-color);
+    border-radius: 15px;
+    text-align: center;
+    width: 90%;
+}
+#Analyse .content{
+    padding-top: 30px;
+}
+
+
+/******************************Responsive*********************************/
+
+@media (max-width: 800px) {
+    #Analyse .titre span{
+        width: 50%;
+        font-size: 15px;
+
+    }
+
+    #Analyse .titre{
+        margin-top: 10px;
+        width: 90vw;
+    }
+}
+
+
+/******************************** details texte *********************************/
+
+.detailsTexte {
+    background-color: white;
+    border-radius: 10px;
+
+}
+
+.a1{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-around;
+    padding: 15px;
+    
+}
+
+.a1 select,.depenseRevenue select{
+    /* width: 100%; */
+    border-radius: none;
+    padding: 5px 0;
+    border: none;
+    border-bottom: 3px solid var(--secondary-color);
+    background-color: white;
+    color: var(--secondary-color);
+    font-weight: 900;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.a1 .infoAna{
+    margin: 5px;
+}
+
+.a1 button {
+    color: var(--primary-color);
+    background-color: var(--background-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    
+
+}
+.a1 button:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.chiffre3{
+    color: red;
+    font-weight: bold;
+}
+
+
+.a2{
+    background-color: rgba(170, 170, 170, 0.3);
+    padding: 10px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+    height: 500px;
+}
+
+
+
+/**************************** Graphique *************************************/
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    /* height: calc(100vh - 100px); */
+    min-height: 400px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Assurez-vous que le conteneur prend toute la largeur disponible */
+    max-width: 600px; /* Ajustez cette valeur selon vos besoins */
+    margin: 0 auto;
+}
+
+#barCanvas {
+    width: 90% !important;
+    height: 60vh !important;
+}
+
+/* Ajout des styles pour la légende */
+.chart-container canvas + div {  /* Cible le conteneur de la légende */
+    margin-left: 5% !important;  /* Aligne avec le graphique */
+    justify-content: flex-start !important;
+    
+}
+
+.chart-container ul.legend-items {
+    justify-content: flex-start !important;
+    padding-left: 0 !important;
+}
+
+#lineChart {
+    /* width: 90% !important; */
+    height: 500px !important;
+}
+
+/******************************** info 2**********************************/
+
+
+
+.depenseRevenue{
+    background-color: rgba(255, 255, 255, 0.297);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.a2 .ListeTrfq{
+    width: 100%;
+}
+
+.a2 .trfq{
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--secondary-color);
+} 
+
+.a2 .depense{
+    color: red;
+}
+
+.a2 .revenue{
+    color: green;
+}
+
+/******************************** demo button styles *********************************/
+
+.demo-btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.demo-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.demo-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.demo-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/******************************** categorie demografie *********************************/
+
+.categorieDemografie {
+    width: 100%;
+    height: 400px; /* Hauteur fixe ou ajustable selon vos besoins */
+    margin: 20px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.categorieDemografie h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+#DemographieCanvas {
+    width: 90% !important;
+    height: calc(90% - 60px) !important; /* Hauteur totale moins la hauteur du titre et des marges */
+}

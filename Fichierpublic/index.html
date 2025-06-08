@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Colombe</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/generale.css">
+    <link rel="stylesheet" href="./css/catalogueSection.css">
+    <link rel="stylesheet" href="./css/contactSection.css">
+    <link rel="stylesheet" href="./css/fenetre.css">
+    <link rel="shortcut icon" type="x-icon" href="./asset/svg/icon.svg">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/confirmation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="confirmationModal" class="modalC">
+        <div class="modal-content">
+          <div class="icon-container">
+            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+          </div>
+          <p class="message">Merci pour votre message ! ☺️</p>
+        </div>
+    </div>
+    <div id="modal-publication" class="modal">
+        <div class="modal-content">
+            <span class="close-actualite close-button">&times;</span>
+            <span class="formeModal1 formeCommande">
+                <p>Faire une commande</p> 
+                
+                    <form id="orderForm" method="post" enctype="multipart/form-data">
+                        <div class="comp">
+                          <label for="itemName">Nom de l'article:</label>
+                          <input type="text" id="itemName" name="itemName" required readonly />
+                        </div>
+                        <div class="comp">
+                          <label for="quantity">Quantité :</label>
+                          <input type="number" id="quantity" required name="quantity" min="1" value="1" />
+                        </div>
+                        <div class="comp">
+                          <label for="numeroTel">Telephone:</label>
+                          <input type="text" name="tel" id="tel" placeholder="Ex: +221 78 194 13 51" required>
+                        </div>
+                        <div class="comp">
+                            <label for="Email">Email:</label>
+                            <input type="email" id="email" placeholder="Moi@gmail.com" required>
+                        </div>
+                        <input type="text" class="itemId hidden" id="itemId" name="itemId" required readonly />
+                        <div class="comp">
+                            <label for="adresse">Adresse:</label>
+                            <input type="text" id="adresse" placeholder="Ex: N'Djamena, Mermoz" required>
+                        </div>
+                        <button type="submit" class="btn">Valider la commande</button>
+                    </form>
+                    
+                      <details>
+                        <summary>Comment foncionne la Commande et la livraison ?</summary>
+                        <p>Apres avoir validé la commande un Agent de <strong>la colombe</strong> vous contacteras pour relever votre position geographique. <br> Vous pouvez egalement <a href="tel:+221781941351">effectuer directement votre commande</a> en nous contactant.</p>
+                      </details>
+            </span>
+            
+        </div>
+    </div>
+    <div class="background">
+        <img src="./asset/image/luxurious-villa-with-modern-architectural-lower.jpeg" alt="">
+        <div class="filtre" id="filtre"></div>
+    </div>
+    <header class="entete">
+        <div class="logo" ondblclick="tableaudeBords()">
+            <img src="./asset/svg/LogoLaColombe.svg" alt="">
+        </div>
+        <nav>
+            <ul class="menu"> 
+                <li><a id="BtnAccueil" class="opt">ACCUEIL</a></li>
+                <span class="minibarre"></span>
+                <li><a  id="BtnCatalogue" class="opt">CATALOGUE</a></li>
+                <span class="minibarre" ></span>
+                <li><a  id="BtnContact" class="opt">CONTACT</a></li>
+                <li><a href="./inscription.html" class="auth-option" id="auth-option">Authentification</a></li>
+            </ul>
+            <div class="hamburger">
+                <img src="./asset/svg/burger.svg" alt="">
+            </div>
+        </nav>
+        <a href="./inscription.html" class="auth-button" id="auth-button">Authentification</a>
+    </header>
+   
+    <main>
+        <!-- Section ACCUEIL -->
+        <section id="accueil" class="section accueil">
+            <div class="content">
+                <h2 class="Slogan"> <span class="ciel">Pour vous,</span>  <br> Nous bâtissons le <span class="highlight">futur</span> de <span class="highlight">l'immobilier</span></h2>
+                <p class="pubText dynamic-text"> </p>
+                <footer>
+                    <div class="socials">
+                        <div class="social">
+                            <a href="#"><img src="./asset/svg/facebook.svg" alt="Facebook"></a>
+                        </div>
+                        <div class="social">
+                            <a href="#"><img src="./asset/svg/insta.svg" alt="Instagram"></a>
+                        </div>
+                        <div class="social">
+                            <a href="#"><img src="./asset/svg/twiter.svg" alt="Twitter"></a>
+                        </div>
+                    </div>
+
+                    <p>&copy; 2025 La Colombe. Tous droits réservés.</p>
+                    <div class="autrePage">
+                        <a href="#">Apropos de nous</a>
+                        <span class="minibarre-bleue"></span>
+                        <a href="#">Membre de la boite</a>
+                    </div>
+                </footer>
+            </div>
+        </section>
+
+        <!-- Section CATALOGUE -->
+        <section id="catalogue" class="section catalogue">
+            <!-- <h2>Catalogue</h2> -->
+            <p class="textCatalogue">Nous disposons d’une large gamme de produit immobilier de tous genre pour une décoration modeste, royal, professionnels et bien encore</p>
+            <div class="content-catalogue">
+                <div class="articles">
+                    <div class="article">
+                        <img src="./asset/image/IMG_1202.PNG" alt="Image de l'article">
+                        <div class="info">
+                            <div class="nom">Marbre Vert (VIP)</div>
+                            <div class="prix">29 900 FCFA</div>
+                            
+                            <div class="btn">
+                                <button class="btn-Commander">Commander</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Section CONTACT -->
+        <section id="contact" class="section contact">
+            <div class="content ordi">
+                <div class="text">
+                    <h1 class="tparl">Parlons de vos projets</h1>
+                    <!-- <img class="contribution" src="./Image/designFormulaire.svg" alt="Contributiont" title="contribution"> -->
+                    <p>
+                        Bienvenue sur notre plateforme, <br>
+                        Chez La Colombe, nous valorisons vos idées et vos projets. Que vous soyez un particulier ou un professionnel, nous sommes là pour vous accompagner dans la réalisation de vos ambitions immobilières.
+                    </p>
+                    <p>
+                        Vous avez une vision pour un projet immobilier ou une idée innovante pour améliorer nos services ? Partagez-la avec nous ! Ensemble, nous pouvons bâtir des solutions adaptées à vos besoins et contribuer à un avenir meilleur.
+                    </p>
+                    
+                    <img class="contribution" src="./asset/svg/designFormulaire.svg"  alt="Contributiont" title="contribution">
+                </div>
+                <div class="idea-form">
+                    <form class="ideeForm" method="post">
+                        <input type="text" name="ida" placeholder="Votre Email" required>
+                       
+                        <textarea placeholder="Decrivez votre Projet" name="textd" rows="10" required></textarea>
+                        <div class="buttons">
+                        <button type="submit" class="submit">Soumettre</button>
+                        <button type="reset" class="reset">Effacer</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        
+            <div class="content phone">
+                <div class="text">
+                    <h1 class="tparl">Parlons de vos idées</h1>
+                    <br>
+                    <img class="contribution" src="./asset/svg/designFormulaire.svg" alt="Contributiont" title="contribution">
+                    <p>
+                        Bienvenue sur notre plateforme, <br>
+                        Chez La Colombe, nous valorisons vos idées et vos projets. Que vous soyez un particulier ou un professionnel, nous sommes là pour vous accompagner dans la réalisation de vos ambitions immobilières.
+                    </p>
+                    <p>
+                        Vous avez une vision pour un projet immobilier ou une idée innovante pour améliorer nos services ? Partagez-la avec nous ! Ensemble, nous pouvons bâtir des solutions adaptées à vos besoins et contribuer à un avenir meilleur.
+                    </p>
+                </div>
+                <div class="idea-form">
+                    <form class="ideeForm" action="" method="post" enctype="multipart/form-data">
+                        <input type="text" name="ida" placeholder="Votre Email" required>
+                        <textarea placeholder="Decrivez votre idée" name="textd" rows="10" required></textarea>
+                        <div class="buttons">
+                            <button type="submit" class="submit">Soumettre</button>
+                            <button type="reset" class="reset">Effacer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <footer class="site-footer">
+                <div class="footer-container">
+                    <div class="footer-section links">
+                        <h2>Adresse</h2>
+                       
+                    </div>
+                    <div class="footer-section">
+                        <h2>Contact</h2>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> BP :</li>
+                            <li><i class="fas fa-phone"></i> +221787575252</li>
+                            <li><i class="fas fa-envelope"></i> contact@lacolombe.com</li>
+                        </ul>
+                    </div>
+            
+                    <div class="footer-section">
+                        <h2>Suivez-nous</h2>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/comsoc.ugb.7"><i class="fab fa-facebook"></i></a>
+                            <a href="https://whatsapp.com/channel/0029VaavgMDFsn0XXIu9312g" target="_blank" class="social-link">
+                                <i class="fab fa-whatsapp"></i> 
+                            </a>
+                            <a href="https://www.tiktok.com/@comsoc_ugb?_t=ZM-8tLJv7Tomfu&_r=1" target="_blank" class="social-link">
+                                <i class="fab fa-tiktok"></i> 
+                            </a>
+                            <a href="https://www.instagram.com/ugbcomsoc?igsh=MWl2dnpuZzgzd2doMw=="><i class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com/@laculturesenegalaiseyt6378?si=mioHxXT8saDBwm9V" target="_blank" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+            
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="footer-bottom">
+                    
+                </div>
+            </footer>
+        </section>
+
+        <div id="imageModal" class="image-modal">
+            <div class="image-modal-content">
+                <span class="image-close-button">&times;</span>
+                <img id="modalImage" src="" alt="Image en grand format">
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/index.js"></script>
+    <script src="./js/form1.js"></script>
+    <script src="./js/dynamiqueText.js"></script>
+</body>
+</html>

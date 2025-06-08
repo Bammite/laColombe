@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Utilisateur - La Colombe</title>
+    <link rel="shortcut icon" type="x-icon" href="./asset/svg/icon.svg">
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .statut {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+        .statut.actif { background: #e8f5e9; color: #2e7d32; }
+        .statut.inactif { background: #ffebee; color: #c62828; }
+        
+        .role {
+            font-style: italic;
+            color: #555;
+        }
+        
+        .no-data {
+            color: #999;
+            font-style: italic;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        .tag.termine { background: #e8f5e9; }
+        .tag.en-cours { background: #fff8e1; }
+
+        .loading-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .data-value:empty::before {
+            content: "Non spécifié";
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- En-tête du profil -->
+        <div class="profile-header">
+
+            <div class="back">
+                <a href="./tableaudeBords.html">
+
+                    <img src="./asset/svg/back-wihte.svg" alt="">
+                </a>
+            </div>
+            <div class="options-menu">
+                <button type="button" class="menu-trigger">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <button class="menu-item" onclick="openModal('password-modal')">
+                        <i class="fas fa-key"></i> Modifier le mot de passe
+                    </button>
+                    <button class="menu-item" onclick="openModal('business-card-modal')">
+                        <i class="fas fa-address-card"></i> Carte de visite
+                    </button>
+                    <button class="menu-item" onclick="Deconnection()">
+                        <i class="fas fa-sign-out-alt"></i>Deconnecter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="profile-content">
+            <!-- Section photo et informations de base
+            <div id="loading-indicator" class="loading-indicator">
+                <div class="spinner"></div>
+                <p>Chargement en cours...</p>
+            </div> -->
+            <div id="error-message" class="error-message" style="display: none;"></div>
+            <div class="profile-basic-info">
+                <div class="profile-image">
+                    <img src="" alt="Photo de profil" id="profile-pic">
+                    <div class="profile-image-overlay">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <div class="basic-info">
+                    <h1><span id="prenom"></span> <span id="nom"></span></h1>
+                    <p class="role" id="role"></p>
+                    <p class="statut" id="statut"></p>
+                </div>
+            </div>
+
+            <!-- Sections d'informations -->
+            <div class="info-sections">
+                <!-- Informations personnelles -->
+                <section class="info-section">
+                    <h2><i class="fas fa-user"></i> Informations personnelles</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Email</label>
+                            <span id="email" class="data-value">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Téléphone</label>
+                            <span id="telephone"class="data-value">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Adresse</label>
+                            <span id="adresse"class="data-value">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Date de naissance</label>
+                            <span id="dateNaissance"class="data-value">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>N° Carte d'identité</label>
+                            <span id="numeroCarteIdentite"class="data-value">Chargement...</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Informations professionnelles (visible uniquement pour les employés) -->
+                <section class="info-section employee-only">
+                    <h2><i class="fas fa-briefcase"></i> Informations professionnelles</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Poste</label>
+                            <span id="poste"class="data-value">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Département</label>
+                            <span id="departement"class="data-value">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Type de contrat</label>
+                            <span id="typeContrat"class="data-value">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Date d'embauche</label>
+                            <span id="dateEmbauche"class="data-value">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Salaire</label>
+                            <span id="salaire"class="data-value">Chargement...</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Historique -->
+                <section class="info-section">
+                    <h2><i class="fas fa-history"></i> Historique</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Dernier accès</label>
+                            <span id="dernierAcces"class="data-value">Chargement...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Date de création</label>
+                            <span id="dateCreation"class="data-value">Chargement...</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projets associés -->
+                <section class="info-section">
+                    <h2><i class="fas fa-project-diagram"></i> Projets</h2>
+                    <div class="projects-list" id="historiqueProjets">
+                        <!-- Les projets seront ajoutés dynamiquement ici -->
+                    </div>
+                </section>
+
+                <!-- Notes -->
+                <section class="info-section">
+                    <h2><i class="fas fa-sticky-note"></i> Notes</h2>
+                    <div class="notes" id="notes">
+                        <!-- Les notes seront ajoutées ici -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="password-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('password-modal')">&times;</span>
+            <h2>Modifier le mot de passe</h2>
+            <form id="password-form">
+                <div class="form-group">
+                    <label>Ancien mot de passe</label>
+                    <input type="password" name="ancienMotDePasse" required>
+                </div>
+                <div class="form-group">
+                    <label>Nouveau mot de passe</label>
+                    <input type="password" name="nouveauMotDePasse" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label>Confirmer le mot de passe</label>
+                    <input type="password" name="confirmationMotDePasse" required minlength="6">
+                </div>
+                <button type="submit">Mettre à jour</button>
+                <span class="Message"></span>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal pour la carte de visite -->
+    <div id="business-card-modal" class="modal" >
+        <div class="modal-content business-card-container">
+            <span class="close" onclick="closeModal('business-card-modal')">&times;</span>
+            <h2>Ma carte de visite</h2>
+            <div class="business-card">
+                <div class="card-front">
+                    <div class="company-info">
+                        <h3 class="company-name">La Colombe</h3>
+                        <p class="company-slogan">Votre partenaire de confiance</p>
+                        <p class="company-website">www.lacolombe.com</p>
+                    </div>
+                </div>
+                <div class="card-back">
+                    <div class="personal-info">
+                        <h3 class="company-name">La Colombe</h3>
+                        <h2 class="user-name"><span id="bc-prenom"></span> <span id="bc-nom"></span></h2>
+                        <p class="user-position" id="bc-poste"></p>
+                        <p class="company-slogan">Votre partenaire de confiance</p>
+                        <div class="contact-info">
+                            <p class="user-phone" id="bc-telephone"></p>
+                            <p class="user-email" id="bc-email"></p>
+                            <p class="user-website">www.lacolombe.com</p>
+                        </div>
+                        <div class="address-info">
+                            <p id="bc-adresse"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="print-button" onclick="printBusinessCard()">
+                <i class="fas fa-print"></i> Imprimer
+            </button>
+        </div>
+    </div>
+    <script src="./js/generale.js"></script>
+    <script src="./js/profileAutre.js"></script>
+</body>
+</html>

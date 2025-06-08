@@ -1,0 +1,168 @@
+#BtRcp .contente{
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    height: 100vh;
+    width: 100%;
+}
+
+
+.message{
+    border-bottom: 0.01px rgb(198, 197, 197) solid;
+    padding: 20px 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nonLus{
+    background-color: rgb(255, 255, 255);
+}
+
+
+
+
+
+
+
+
+/* Style de base */
+
+
+.messages-container {
+    margin-top: 20px;
+    /* border: .1px solid var(--primary-color); */
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#BtRcp{
+    padding: 0;
+}
+
+.messages-header {
+    display: flex;
+    background: #f5f5f5;
+    padding: 10px 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-email { width: 25%; }
+.header-message { width: 55%; }
+.header-date { width: 20%; text-align: right; }
+
+.messages-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.message-item {
+    display: flex;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.message-item:hover {
+    background: #f9f9f9;
+}
+
+.message-item.unread {
+    background: #f0f7ff;
+    font-weight: 500;
+}
+
+.message-email {
+    width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #1a73e8;
+}
+
+.message-content {
+    width: 55%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #555;
+}
+
+.message-date {
+    width: 20%;
+    text-align: right;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Modal */
+.modal2 {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal-content2 {
+    background: #fff;
+    margin: 5% auto;
+    padding: 25px;
+    width: 60%;
+    max-width: 700px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.close-modal2 {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-date {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.modal-message {
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 768px) {
+    .messages-header {
+        display: none;
+    }
+    
+    .message-item {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .message-email, 
+    .message-content, 
+    .message-date {
+        width: 100%;
+        text-align: left;
+    }
+    
+    .message-date {
+        margin-top: 5px;
+        font-size: 0.8em;
+        color: #888;
+    }
+    
+    .modal-content2 {
+        width: 90%;
+        margin: 20% auto;
+        padding: 15px;
+    }
+}

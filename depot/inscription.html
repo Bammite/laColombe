@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Inscription</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <form id="inscriptionForm" method="POST" action="/inscription">
+        <h1>Inscription</h1>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required />
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit">S'inscrire</button>
+        <a href="./connexion.html">Vous avez déjà un compte ? Se connecter</a>
+    </form>
+
+    <script>
+        document.getElementById('inscriptionForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/inscription', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Inscription réussie !');
+                    window.location.href = '/connexion';
+                } else {
+                    const error = await response.text();
+                    alert(`Erreur : ${error}`);
+                }
+            } catch (err) {
+                console.error('Erreur lors de l\'inscription :', err);
+                alert('Une erreur est survenue. Veuillez réessayer.');
+            }
+        });
+    </script>
+</body>
+</html>

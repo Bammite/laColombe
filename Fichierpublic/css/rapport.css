@@ -1,0 +1,248 @@
+/* Style général */
+.report-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Formulaire */
+.upload-container {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.report-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.file-upload {
+    grid-column: span 2;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-upload label {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #e9ecef;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.file-upload label:hover {
+    background: #dee2e6;
+}
+
+.file-info {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #666;
+}
+
+.submit-btn {
+    grid-column: span 2;
+    padding: 12px;
+    background: #4a6baf;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background: #3a5a9f;
+}
+
+.spinner {
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top: 3px solid white;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Liste des rapports */
+.reports-list {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.list-header {
+    display: flex;
+    padding: 12px 15px;
+    background: #f1f3f5;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.header-item {
+    padding: 0 10px;
+}
+
+.ref-col { width: 40%; }
+.date-col { width: 20%; }
+.cat-col { width: 20%; }
+.action-col { width: 20%; text-align: right; }
+
+.reports-container {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.report-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.report-item:hover {
+    background: #f8f9fa;
+}
+
+.report-ref {
+    width: 40%;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.report-date {
+    width: 20%;
+    color: #666;
+    font-size: 14px;
+}
+
+.report-cat {
+    width: 20%;
+}
+
+.report-cat span {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.cat-financier { background: #e3f2fd; color: #1565c0; }
+.cat-technique { background: #e8f5e9; color: #2e7d32; }
+.cat-audit { background: #fff8e1; color: #ff8f00; }
+
+.report-actions {
+    width: 20%;
+    text-align: right;
+}
+
+.action-btn {
+    padding: 6px 10px;
+    margin: 3px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: opacity 0.3s;
+    width: 80px;
+}
+
+.action-btn:hover {
+    opacity: 0.8;
+}
+
+.download-btn {
+    background: #4a6baf;
+    color: white;
+}
+
+.delete-btn {
+    background: #e53935;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .report-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-group {
+        grid-column: span 1 !important;
+    }
+    
+    .list-header {
+        display: none;
+    }
+    
+    .report-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+    
+    .report-ref,
+    .report-date,
+    .report-cat,
+    .report-actions {
+        width: 100%;
+        padding: 5px 0;
+    }
+    
+    .report-actions {
+        text-align: left;
+        margin-top: 10px;
+    }
+    
+    .action-btn {
+        margin-left: 0;
+        margin-right: 8px;
+    }
+}

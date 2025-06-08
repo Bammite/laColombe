@@ -1,0 +1,138 @@
+:root {
+    --primary-color: rgba(206, 89, 26, 1);
+    --secondary-color: rgb(111, 45, 9,1);
+    --text-color: black;
+    --background-color: rgba(255, 238, 218, 0.715);
+    --paddingOpt: 12px;
+}
+
+
+*{
+    font-family: 'Inria Sans', sans-serif;
+    font-style: normal;
+    transition: all .4s;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.space{
+    height: 100px;
+}
+
+summary {cursor: pointer;}
+.space1{
+    height: 50px;
+}
+
+.hidden{
+    display: none;
+}
+
+.bar{
+    height: 5px;
+    width: 100%;
+    margin: 10px 0;
+    background-color: black;
+}
+
+.section{
+    margin-bottom: 50px;
+}
+
+
+.sc{
+    font-family: 'Inria Sans', sans-serif;
+    font-style: normal;
+    flex-direction: column;
+    height: 100%;
+    margin-top: 100px;
+    padding: 2vw;
+    margin-bottom: 100px;
+}
+
+.sc .contente{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    align-items: center;
+}
+
+.TitleFatcure{
+    font-family: 'Inter';
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.cadre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    height: 250px;
+    width: 200px;
+}
+
+.cadre_content{
+    border-radius: 10px;
+    height: 200px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.cadre_content span{
+    font-size: 100px;
+    color: var(--primary-color);
+}
+
+.cadre a{
+    width: 100%;
+    position: relative;
+    /* background-color: black; */
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    align-items: start;
+    text-decoration: none;
+    border-radius: 10px;
+    color: white;
+
+}
+
+#projet .cadre a{
+    background-color: transparent;
+    color: black;
+}
+
+.cadre .paie{
+    background: url(../asset/image/paie.JPG);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.cadre .titreCarte span{
+    font-size: 15px;
+    margin: 8px;
+    color: white;
+}
+
+.cadre .titreCarte {
+    padding: 8px 0;
+    background-color: rgb(1, 1, 1,.7);
+    width: 100%;
+    color: white;
+    border-radius: 10px;
+}
+
+/*********************************************** Modale *****************************************/
+
