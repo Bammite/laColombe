@@ -121,6 +121,9 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
+// Ajoutez cette ligne avant la connexion MongoDB
+mongoose.set('strictQuery', false);
+
 // MongoDB connection
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01';
 
