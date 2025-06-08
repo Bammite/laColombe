@@ -118,6 +118,16 @@ app.use('/assets/uploads', (req, res, next) => {
     next();
 });
 
+// Ajouter le middleware de gestion d'erreurs
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    res.status(500).json({
+        success: false,
+        message: 'Erreur serveur',
+        error: err.message
+    });
+});
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -129,8 +139,18 @@ mongoose.set('strictQuery', false);
 mongoose.connect('mongodb+srv://princebammite:8NdzHU8xc0dzJStV@bdcolombe01.gsuewhb.mongodb.net/Node-Api-Colombe?retryWrites=true&w=majority&appName=BdColombe01', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000,
+    serverSelectionTimeoutMS: 10000,
     socketTimeoutMS: 45000,
 })
-.then(() => console.log('Connexion à MongoDB réussie!'))
-.catch(err => console.error('Erreur de connexion à MongoDB:', err));
+.then(() => {
+    console.log('MongoDB connecté avec succès');
+})
+.catch(err => {
+    console.error('Erreur de connexion MongoDB:', err);
+    process.exit(1);
+});
+
+// Ajouter un gestionnaire d'erreurs non capturées
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
